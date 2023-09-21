@@ -7,38 +7,45 @@
 
 const students = [
 	{
-		name: "Agathe",
+		name: "Alexandre",
 	},
 	{
-		name: "Angelica",
+		name: "Elena",
 	},
 	{
-		name: "Conrad",
+		name: "Fabien",
 	},
 	{
-		name: "Jose",
+		name: "Maria",
 	},
 	{
-		name: "Katia",
+		name: "Monika",
 	},
 	{
-		name: "Leia",
+		name: "Roberta",
 	},
 	{
-		name: "Lily",
+		name: "Raafat",
 	},
 	{
-		name: "Nicolas",
+		name: "Romain",
 	},
 	{
-		name: "Rudy",
+		name: "Rony",
+	},
+	{
+		name: "Victor",
 	},
 ]
 
-// Create a random age beween 18 and 100 for all of you !
-students.forEach((student) => {
-	student.age = Math.floor(Math.random * 82) + 18
-})
+// Create a random age beween 18 and 99 for all of you !
+
+for (const student of students) {
+	const randomAge = Math.floor(Math.random() * 100 - 18) + 18
+	student.age = randomAge
+}
+// console.log(students)
+
 /**
  * Function syntax
  */
@@ -46,58 +53,61 @@ students.forEach((student) => {
 function functionName(parameter1, param2) {
 	/**
 	 * What ever needs to be done
+	 * Sometime we might actually want to check for bad inputs
+	 * and respond with our own Error
 	 */
 }
 
-const arrowSumFunction = (a, b) => {
-	if (typeof a !== "number" || typeof b !== "number") {
-		throw Error("Hey, please know how to use maths.")
+function sayHelloToAStudent(student) {
+	if (!student || !student.name) {
+		throw Error("Please provide a valid student")
 	}
-	return a + b
+
+	console.log(`Hello ${student.name}`)
 }
 
-arrowSumFunction(5, 7)
+sayHelloToAStudent(students[0])
+console.log("1")
+// sayHelloToAStudent()
+console.log("2")
+// sayHelloToAStudent({})
+console.log("3")
+// sayHelloToAStudent([])
+console.log("4")
+// sayHelloToAStudent("")
+console.log("5")
+// sayHelloToAStudent({ age: 20 })
+sayHelloToAStudent({ name: "Bob" })
 
-function sum(a, b) {
-	if (typeof a !== "number" || typeof b !== "number") {
-		throw Error("Hey, please know how to use maths.")
+function product(a, b) {
+	if (typeof a !== "number" && typeof b !== "number") {
+		throw Error("Please do math with numbers")
 	}
-	console.log("Arguments: ", arguments)
-	console.log(a + b)
-	// return "hi"
-	return a + b
-	console.log("I will not run")
-}
-const returnedValue = sum(5, 6)
 
-console.log(sum(7, 9))
-// const returnedValue = 'hi'
-console.log(returnedValue)
-
-const nestedFunctionExecutions = sum(sum(2, 5), sum(5, 6))
-console.log(nestedFunctionExecutions)
-// sum(7, sum(5,6))
-// sum(7, 11)
-// 18
-
-function oddOrEven(number) {
-	if (number % 2 === 0) {
-		return "Even"
-	}
-	console.log("We have an odd number")
-	return "Odd"
+	return a * b
 }
 
-biggerSum(2, 5, 8, 43, 135, 14, 25, 865)
-function biggerSum(...allTheArguments) {
-	console.log(allTheArguments)
-}
+const multiplied = product(5, 12)
+console.log(multiplied)
+// product()
+/**
+ * Nested function execution
+ */
+const sum = (a, b) => a + b
+
+const result = product(sum(3, 20), product(product(2, 5), sum(3, 1)))
+console.log(result)
+
+// function sum (a, b) {
+// 	return a + b
+// }
+
+// const sum = (a, b) => {
+// 	return a + b
+// }
 
 /**
- * {
- * 	firstName: name,
- *  age: age
- * }
+ *
  */
 
 function getUserInfos(userName = "No username", userAge = 20) {
@@ -107,32 +117,38 @@ function getUserInfos(userName = "No username", userAge = 20) {
 	}
 }
 
-getUserInfos("John", 24)
-console.log(getUserInfos("Alice"))
-console.log(getUserInfos())
+const user = getUserInfos("bob", 25)
+// const notAValidUser = getUserInfos(undefined, 41)
+// console.log(notAValidUser)
 
-function getBiggestNumberAndPosition(array) {
-	let index = 0
-	let biggest = -Infinity
-
-	for (let i = 0; i < array.length; i++) {
-		const number = array[i]
-		if (number > biggest) {
-			console.log(biggest, number, i)
-			biggest = number
-			index = i
-		}
+/**
+ * Average function receive an Array as argument
+ * Loop over the Array, adding the total age
+ * return the average to a precision of 2
+ */
+function average(myArray) {
+	// if (myArray.length === 0)
+	if (!myArray.length) {
+		return null
 	}
 
-	// return [biggest, index]
-	return {
-		maximum: biggest,
-		position: index,
-	}
+	return (sumOfArray(myArray) / myArray.length).toFixed(3)
+	const avg = sumOfArray(myArray) / myArray.length
+
+	return +avg.toFixed(3)
 }
-console.log(
-	"Biggest and position: ",
-	getBiggestNumberAndPosition([45, 76, 104, 12, 97])
-)
 
-sum("John", {})
+function sumOfArray(myArray) {
+	if (!myArray.length) {
+		return null
+	}
+	let total = 0
+	for (const element of myArray) {
+		total += element.age
+	}
+	return total
+}
+
+const averageAge = average(students)
+console.log(averageAge)
+// const averageAge = average(pets)

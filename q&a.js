@@ -1,22 +1,33 @@
-const sentence =
-	"Lorem ipsum, dolor sit amet et ET conetsectetur etat adipisicing elit. Sequi fugit suscipit cupiditate distinctio reprehenderit voluptas, quasi esse alias atque error a officia. Necessitatibus, quam. Nisi vitae soluta fugiat voluptate itaque?"
+const justAStringWithEt = "et rometo et papapaet et"
 
-let count = 0
-for (let i = 0; i < sentence.length; i++) {
-	if (
-		sentence[i - 1] === " " &&
-		sentence[i] === "e" &&
-		sentence[i + 1] === "t"
-	) {
-		count++
+// const cleanupRegexp = /\w+/gi
+const cleanupRegexp = new RegExp(/\bet\b/, "gi")
+
+console.log(justAStringWithEt.match(cleanupRegexp))
+
+const palindrome = "Am?o !r, Ro...4m,az"
+
+//  'a' !== 'A'   true
+//  '!' !== '!'   false
+//  " "  !== " "  false
+
+let cleanedUpPalindrome = ""
+
+for (let i = 0; i < palindrome.length; i++) {
+	if (palindrome[i].toUpperCase() !== palindrome[i].toLowerCase()) {
+		cleanedUpPalindrome += palindrome[i].toUpperCase()
 	}
 }
 
-console.log(count)
-
-const regex = /\bet\b/gi
-const otherRegExp = new RegExp(/\bet\b/, "gi")
-
-console.log(sentence.match(regex))
-
-// choco
+console.log(cleanedUpPalindrome)
+// let sentence = "well, hello, how are you?"
+let cleanedUpPalindromeAsArray = cleanedUpPalindrome.split("")
+// for (let i = cleanedUpPalindrome.length - 1; i >= 0; i--) {
+// 	revesedPalindrome += cleanedUpPalindrome[i]
+// }
+console.log(cleanedUpPalindromeAsArray)
+// cleanedUpPalindromeAsArray.toReversed()
+console.log(cleanedUpPalindromeAsArray)
+// if (revesedPalindrome === cleanedUpPalindrome) {
+// 	console.log("It's a palindrome indeed")
+// }

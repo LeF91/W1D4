@@ -1,5 +1,34 @@
 const fridge = ["Tomatoes", "eggs", "milk"]
 
+// Adding something to the Array
+fridge.push("Parmigiano")
+
+console.log(fridge)
+
+// Removing an element
+/**
+ * To add something at the beginning:
+ * - unshift
+ * To remove an element from the beginning
+ * - shift
+ */
+const lastElement = fridge.pop()
+// console.table({ lastElement, fridge })
+fridge.splice(2, 0, "Lettuce", "Peanut Butter")
+console.log(fridge)
+
+for (let i = 0; i < fridge.length; i += 2) {
+	const food = fridge[i]
+	console.log(food)
+}
+// for of loop
+
+for (const element of fridge) {
+	console.log(element)
+}
+// for (const food of fridge) {
+// 	console.log(food)
+// }
 const betterFridge = [
 	{
 		name: "Tomatoes",
@@ -15,108 +44,58 @@ const betterFridge = [
 	},
 ]
 
-// Adding something to the Array
-console.log(fridge.push("Parmigiano"))
-
-// Removing an element
-console.log(fridge.pop())
-
-let count = 0
-for (let i = 0; i < betterFridge.length; i++) {
-	// console.log(betterFridge[i])
-	const food = betterFridge[i]
-	count = count + food.quantity
-	// count += betterFridge[i].quantity
+let total = 0
+for (const food of betterFridge) {
+	console.log(food.quantity)
+	total += food.quantity
 }
+console.log(total)
 
-console.log("total items in my fridge: ", count)
-
-// for of loop
-
-let newCount = 0
-let food = "something"
-for (const fridgeFood of betterFridge) {
-	// food += fridgeFood.name
-	newCount += fridgeFood.quantity
-}
-
-// console.log(food)
-console.log(newCount)
 // forEach
 
 //  array.forEach((element) => {})
-fridge.forEach((element) => {
-	console.log(element)
+betterFridge.forEach((foodElement) => {
+	console.log(foodElement.name)
 })
 
-const numberArray = [0, 1, 2, 3, 4, 5]
+// Nested Arrays
 
-for (let i = 0; i < numberArray.length / 2; i++) {
-	console.log(numberArray[i])
-}
-
-console.log("Matrix time")
 const matrix = [
-	// 0  1  2
-	[0, 5, 9], //  0
-	[5, 2, 8], //  1
-	[74, -52, 1], //  2
+	[-87, -12, -65],
+	[-512, -12, -650],
+	[-87, -12, -4],
 ]
 
-console.log(matrix[2][1])
-const lastElementofMyMatrix = matrix[2]
-const firstElementInTheNestedArray = lastElementofMyMatrix[0]
-console.log(firstElementInTheNestedArray)
+// console.log(matrix[1][2])
 
-// Nested loops, finding the highest number
-
-let max = -Infinity
-// let max = Infinity
-
+for (let i = 0; i < matrix.length; i++) {
+	// const row = matrix[i]
+	for (let j = 0; j < matrix[i].length; j++) {
+		const number = matrix[i][j]
+	}
+}
+let maxNumber = -Infinity
 for (const row of matrix) {
-	// console.log("This is the row: ", row)
+	// console.log(row)
 	for (const number of row) {
-		// console.log(number)
-		if (number > max) {
-			// We can reverse number < max, if we want to find the lowest, starting at +Infinity
-			console.log(`Current number: ${number}, max is currently: ${max}`)
-			max = number
-		} else {
-			console.log(`${max} is bigger than ${number}`)
+		console.log(number)
+		if (number > maxNumber) {
+			maxNumber = number
 		}
 	}
 }
 
-console.log("Max number in my matrix", max)
+console.log(maxNumber)
 
-const newFridge = fridge
-newFridge[0] = "Butter"
+const flattenedArray = matrix.flat()
+console.log(flattenedArray)
 
-console.log(fridge, newFridge)
+console.log(Math.max(...flattenedArray))
+console.log(Math.min(...flattenedArray))
+const arrayOfWords = ["dog", "parrot", "cat"]
+console.log(...arrayOfWords)
+console.log(...flattenedArray)
+// const simpleArr = [100, 1, 2, 123, 10]
 
-// let copy = []
-// for (const element of fridge) {
-// 	copy.push(element)
-// }
-const copy = [...fridge]
-console.log(...fridge)
-
-// fridge = []
-copy.push("Nutella")
-// Shallow copy
-console.log(copy, fridge)
-
-const newMatrix = [
-	["Risk", "catan"],
-	["Running", "Skate"],
-	["Cinema", "Series"],
-]
-const shallowCopy = [...newMatrix]
-
-// shallowCopy[0][0] = "Terraforming mars"
-
-const deepCopy = structuredClone(newMatrix)
-
-deepCopy[0][0] = "Terraforming mars"
-console.table(newMatrix)
-console.table(deepCopy)
+// simpleArr.sort()
+// console.log(simpleArr)
